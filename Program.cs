@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Formats.Asn1;
 using System.Globalization;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace MyFirstProject
         static void Main(string[] args)
         {
             CodeLearning CodeLearning = new CodeLearning();
-            CodeLearning.ListIntroduction();
+            CodeLearning.DictionaryIntroduction();
 
             // Exercise Exercise = new Exercise();
             // Exercise.MathQuestion();            
@@ -224,6 +225,64 @@ namespace MyFirstProject
             foreach (int number in numbers)
             {
                 System.Console.Write($"{number} ");
+            }
+        }
+
+        public void DictionaryIntroduction() {
+            Dictionary<string, string> teachers = new Dictionary<string, string>()
+            {
+                {"Math", "Aba"},
+                {"Science", "Jacob"},
+                {"English", "Mary"},
+            };
+
+            System.Console.WriteLine("This is the initial teachers data we have:");
+
+            // List the initial teachers.
+            foreach (var teacher in teachers)
+            {
+                System.Console.WriteLine($"The {teacher.Key} teacher is Mr/Miss {teacher.Value}");
+            }
+
+            int countTeachersToAdd = 2;
+
+            // Add some additional teachers.
+            for (int i = 0; i < countTeachersToAdd; i++)
+            {
+                System.Console.WriteLine($"Add the {teachers.Count}th teacher:");
+                
+                System.Console.WriteLine("Subjects:");
+                string subjects = Console.ReadLine();
+
+                System.Console.WriteLine("Name:");
+                string name = Console.ReadLine();
+
+                teachers.Add(subjects, name);
+            }
+
+            System.Console.WriteLine("This is our teachers now:");
+
+            // List the updated teachers.
+            foreach (var teacher in teachers)
+            {
+                System.Console.WriteLine($"The {teacher.Key} teacher is Mr/Miss {teacher.Value}");
+            }
+
+            System.Console.WriteLine("Get a teacher name for a specific subject:");
+            string selectedSubject = System.Console.ReadLine();
+
+            // Get a teacher name for a specific subject.
+            if (string.IsNullOrEmpty(selectedSubject)) 
+            {
+                System.Console.WriteLine("Invalid subject input");
+            }
+            else if (teachers.TryGetValue(selectedSubject, out string selectedTeacherName)) 
+            {
+                System.Console.WriteLine($"The {selectedSubject} teacher is {selectedTeacherName}");
+            }
+            else 
+            {
+                System.Console.WriteLine($"There is no {selectedSubject} teacher in our database");
             }
         }
     }
