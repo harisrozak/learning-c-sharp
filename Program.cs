@@ -9,11 +9,11 @@ namespace MyFirstProject
     {
         static void Main(string[] args)
         {
-            CodeLearning CodeLearning = new CodeLearning();
-            CodeLearning.DictionaryIntroduction();
+            // CodeLearning CodeLearning = new CodeLearning();
+            // CodeLearning.DictionaryIntroduction();
 
-            // Exercise Exercise = new Exercise();
-            // Exercise.MathQuestion();            
+            Exercise Exercise = new Exercise();
+            Exercise.ListLengthMultiplier();            
         }
     }
 
@@ -72,7 +72,7 @@ namespace MyFirstProject
 
         public void ConsoleInputOutput() {
             System.Console.Write("Enter your name: ");
-            string newName = Console.ReadLine();
+            string? newName = Console.ReadLine();
 
             System.Console.WriteLine();
 
@@ -115,7 +115,7 @@ namespace MyFirstProject
 
         public void StringComparation() {
             System.Console.WriteLine("Enter your name:");
-            string name = System.Console.ReadLine();
+            string? name = System.Console.ReadLine();
             string correctName = "Aba";
 
             if (string.IsNullOrEmpty(name)) {
@@ -252,12 +252,16 @@ namespace MyFirstProject
                 System.Console.WriteLine($"Add the {teachers.Count}th teacher:");
                 
                 System.Console.WriteLine("Subjects:");
-                string subjects = Console.ReadLine();
+                string? subjects = Console.ReadLine();
 
                 System.Console.WriteLine("Name:");
-                string name = Console.ReadLine();
+                string? name = Console.ReadLine();
 
-                teachers.Add(subjects, name);
+                if (!string.IsNullOrEmpty(subjects) && !string.IsNullOrEmpty(name)) 
+                {
+                    teachers.Add(subjects, name);
+                }
+
             }
 
             System.Console.WriteLine("This is our teachers now:");
@@ -269,14 +273,14 @@ namespace MyFirstProject
             }
 
             System.Console.WriteLine("Get a teacher name for a specific subject:");
-            string selectedSubject = System.Console.ReadLine();
+            string? selectedSubject = System.Console.ReadLine();
 
             // Get a teacher name for a specific subject.
             if (string.IsNullOrEmpty(selectedSubject)) 
             {
                 System.Console.WriteLine("Invalid subject input");
             }
-            else if (teachers.TryGetValue(selectedSubject, out string selectedTeacherName)) 
+            else if (teachers.TryGetValue(selectedSubject, out string? selectedTeacherName)) 
             {
                 System.Console.WriteLine($"The {selectedSubject} teacher is {selectedTeacherName}");
             }
@@ -322,6 +326,72 @@ namespace MyFirstProject
                     System.Console.WriteLine("Aww, it was close!, sorry!");
                 }
             }            
+        }
+
+        public void EvenOddLists() {
+            List<int> evenNumbers = new List<int>();
+            List<int> oddNumbers = new List<int>();
+
+            int numberLimit = 20;
+
+            for (int i = 1; i <= numberLimit; i++)
+            {
+                if (i % 2 == 0) 
+                {
+                    evenNumbers.Add(i);
+                }
+                else
+                {
+                    oddNumbers.Add(i);
+                }
+            }
+
+            System.Console.WriteLine($"The even numbers form 1 to {numberLimit} are:");
+
+            foreach (var number in evenNumbers)
+            {
+                System.Console.Write($"{number} ");
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine($"The odd numbers form 1 to {numberLimit} are:");
+
+            foreach (var number in oddNumbers)
+            {
+                System.Console.Write($"{number} ");
+            }
+        }
+
+        public void ListLengthMultiplier() {
+            List<int> numbers = new List<int>();
+
+            System.Console.WriteLine("This is a list multiplier app");
+
+            System.Console.WriteLine("Enter a number:");
+            int.TryParse(System.Console.ReadLine(), out int submittedNumber);
+
+            System.Console.WriteLine("Enter the list length:");
+            int.TryParse(System.Console.ReadLine(), out int submittedLength);
+
+            if (submittedNumber < 1 || submittedLength < 1)
+            {
+                System.Console.WriteLine("Your number or length must be a valid number and bigger than 0");
+            }
+            else
+            {
+                for (int i = 1; i <= submittedLength; i++)
+                {
+                    int multiplied = submittedNumber * i;
+                    numbers.Add(multiplied);
+                }
+            }
+
+            System.Console.WriteLine($"The result is:");
+
+            foreach (var number in numbers)
+            {
+                System.Console.Write($"{number} ");
+            }
         }
     }
 }
