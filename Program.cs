@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Formats.Asn1;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -11,12 +12,12 @@ namespace MyFirstProject
         {
             // CodeLearning NewCodeLearning = new CodeLearning();
             // NewCodeLearning.DictionaryIntroduction();
+            
+            // DrawTriangle NewTriangle = new DrawTriangle();
+            // NewTriangle.Draw();
 
-            // Exercise NewExercise = new Exercise();
-            // NewExercise.ListLengthMultiplier();   
-
-            DrawTriangle NewTriangle = new DrawTriangle();
-            NewTriangle.Draw();
+            // Exercise.ListLengthMultiplier();   
+            Exercise.RunCustomTryParse();   
         }
     }
 
@@ -308,7 +309,7 @@ namespace MyFirstProject
 
     public class Exercise
     {
-        public void MathQuestion() 
+        public static void MathQuestion() 
         {
             System.Console.Write("Insert the first number: ");
             bool isNum1 = int.TryParse(System.Console.ReadLine(), out int Num1);
@@ -344,7 +345,7 @@ namespace MyFirstProject
             }            
         }
 
-        public void EvenOddLists() 
+        public static void EvenOddLists() 
         {
             List<int> evenNumbers = new List<int>();
             List<int> oddNumbers = new List<int>();
@@ -379,7 +380,7 @@ namespace MyFirstProject
             }
         }
 
-        public void ListLengthMultiplier() 
+        public static void ListLengthMultiplier() 
         {
             List<int> numbers = new List<int>();
 
@@ -409,6 +410,46 @@ namespace MyFirstProject
             foreach (var number in numbers)
             {
                 System.Console.Write($"{number} ");
+            }
+        }
+
+        public static void RunCustomTryParse() {            
+            bool success = false;
+
+            while (!success)
+            {
+                System.Console.WriteLine("Enter a number:");            
+                string? text = System.Console.ReadLine();
+                bool isNumber = CustomTryParse(text, out int number, out string message);
+
+                if (isNumber) 
+                {
+                    System.Console.WriteLine($"The int conversion of {number} is succeeded.");
+                    success = true;
+                }
+                else
+                {
+                    System.Console.WriteLine($"Failed to convert: {message} Please try again.");
+                }
+            }
+
+            System.Console.WriteLine("Goodbye!");
+        }
+
+        public static bool CustomTryParse(string? text, out int number, out string message)
+        {
+            message = "Succeeded";
+
+            try
+            {
+                number = Convert.ToInt32(text);
+                return true;
+            }
+            catch (System.Exception e)
+            {
+                number = 0;   
+                message = e.Message;             
+                return false;
             }
         }
     }
