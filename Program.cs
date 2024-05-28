@@ -9,17 +9,21 @@ namespace MyFirstProject
     {
         static void Main(string[] args)
         {
-            // CodeLearning CodeLearning = new CodeLearning();
-            // CodeLearning.DictionaryIntroduction();
+            // CodeLearning NewCodeLearning = new CodeLearning();
+            // NewCodeLearning.DictionaryIntroduction();
 
-            Exercise Exercise = new Exercise();
-            Exercise.ListLengthMultiplier();            
+            // Exercise NewExercise = new Exercise();
+            // NewExercise.ListLengthMultiplier();   
+
+            DrawTriangle NewTriangle = new DrawTriangle();
+            NewTriangle.Draw();
         }
     }
 
     public class CodeLearning
     {
-        public void NumericDataTypes() {
+        public void NumericDataTypes() 
+        {
             int age = 23;
             long bigNumber = 90000000L;
             double negative = -55.2D;
@@ -31,7 +35,8 @@ namespace MyFirstProject
             Console.WriteLine(flooat);
         }
 
-        public void TextBasedDataTypes() {
+        public void TextBasedDataTypes() 
+        {
             string name = "Aba";
             char letter = 'a';
 
@@ -41,7 +46,8 @@ namespace MyFirstProject
             System.Console.WriteLine(letter);
         }
 
-        public void ConvertStringToNumber() {
+        public void ConvertStringToNumber() 
+        {
             string strAge = "23";
             int intAge = Convert.ToInt32(strAge);
             System.Console.WriteLine(intAge);
@@ -51,7 +57,8 @@ namespace MyFirstProject
             System.Console.WriteLine(longBigNumber);
         }
 
-        public void Operators() {
+        public void Operators() 
+        {
             bool isMale = true;
             string sex = isMale ? "Male" : "Female";
             System.Console.WriteLine(sex);
@@ -70,7 +77,8 @@ namespace MyFirstProject
             System.Console.WriteLine(300 * percentDiscount);
         }
 
-        public void ConsoleInputOutput() {
+        public void ConsoleInputOutput() 
+        {
             System.Console.Write("Enter your name: ");
             string? newName = Console.ReadLine();
 
@@ -90,7 +98,8 @@ namespace MyFirstProject
             }
         }
 
-        public void StringFormat() {
+        public void StringFormat() 
+        {
             double longDecimal = 1000D / 12.44D;
             string simplifiedLongDecimal = string.Format("This is the simplified decimal: {0:0.00} OR {0:0.0}", longDecimal);
             
@@ -105,7 +114,8 @@ namespace MyFirstProject
             System.Console.WriteLine(money.ToString("C", CultureInfo.CreateSpecificCulture("id-ID"))); // -Rp3,33
         }
 
-        public void StringVerbatim() {
+        public void StringVerbatim() 
+        {
             string NormalString = "C:\\Users\\Lorem\\Ipsum\\Dolor\nNew Line Test\tTab Test";
             string VerbatimString = @"C:\Users\Lorem\Ipsum\Dolor Sit Amet";
 
@@ -113,7 +123,8 @@ namespace MyFirstProject
             System.Console.WriteLine(VerbatimString);
         }
 
-        public void StringComparation() {
+        public void StringComparation() 
+        {
             System.Console.WriteLine("Enter your name:");
             string? name = System.Console.ReadLine();
             string correctName = "Aba";
@@ -129,7 +140,8 @@ namespace MyFirstProject
             }
         }
 
-        public void ArrayIntroduction() {
+        public void ArrayIntroduction() 
+        {
             int[] numbers = new int[4] // Set the length of the array, in this case is 4
             {
                 1, 2, 3, 4 // Set the array values
@@ -162,7 +174,8 @@ namespace MyFirstProject
             }
         }
 
-        public void ArraySearch() {
+        public void ArraySearch() 
+        {
             int[] numbers = new int[]
             {
                 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
@@ -190,7 +203,8 @@ namespace MyFirstProject
             }
         }
 
-        public void ListIntroduction() {
+        public void ListIntroduction() 
+        {
             List<int> numbers = new List<int>()
             {
                 1, 2, 3, 5
@@ -228,7 +242,8 @@ namespace MyFirstProject
             }
         }
 
-        public void DictionaryIntroduction() {
+        public void DictionaryIntroduction() 
+        {
             Dictionary<string, string> teachers = new Dictionary<string, string>()
             {
                 {"Math", "Aba"},
@@ -293,7 +308,8 @@ namespace MyFirstProject
 
     public class Exercise
     {
-        public void MathQuestion() {
+        public void MathQuestion() 
+        {
             System.Console.Write("Insert the first number: ");
             bool isNum1 = int.TryParse(System.Console.ReadLine(), out int Num1);
 
@@ -328,7 +344,8 @@ namespace MyFirstProject
             }            
         }
 
-        public void EvenOddLists() {
+        public void EvenOddLists() 
+        {
             List<int> evenNumbers = new List<int>();
             List<int> oddNumbers = new List<int>();
 
@@ -362,7 +379,8 @@ namespace MyFirstProject
             }
         }
 
-        public void ListLengthMultiplier() {
+        public void ListLengthMultiplier() 
+        {
             List<int> numbers = new List<int>();
 
             System.Console.WriteLine("This is a list multiplier app");
@@ -391,6 +409,87 @@ namespace MyFirstProject
             foreach (var number in numbers)
             {
                 System.Console.Write($"{number} ");
+            }
+        }
+    }
+
+    public class DrawTriangle
+    {
+        public int width = 0;
+
+        public void Draw() 
+        {
+            this.width = this.GetInputInt("Insert the triangle width that you are desired to:");
+
+            if (this.width <= 1)
+            {
+                System.Console.WriteLine("The triangle width must be greater than 1");
+                return;
+            }
+
+            bool isEven = this.width % 2 == 0;
+            
+            if (isEven)
+            {
+                this.DrawEvenTriangle();
+            }
+            else
+            {
+                this.DrawOddTriangle();
+            }
+        }
+
+        public int GetInputInt(string message) 
+        {
+            System.Console.WriteLine(message);
+            bool isNumber = int.TryParse(Console.ReadLine(), out int number);
+            return isNumber ? number : 0;
+        }
+
+        public void DrawEvenTriangle() 
+        {
+            for (int i = 1; i <= this.width; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {                    
+                    System.Console.Write("*");
+                }
+                System.Console.WriteLine();
+            }
+        }
+
+        public void DrawOddTriangle() 
+        {
+            List<int> rows = new List<int>();
+
+            // Determine the triangle rows.
+            for (int i = 1; i <= this.width; i++)
+            {
+                if (i % 2 != 0) 
+                {
+                    rows.Add(i);
+                }
+            }
+
+            // Determine the triangle height.
+            int height = rows.Count;
+
+            // Draw the triangle.
+            for (int i = 0; i < height; i++)
+            {
+                int spaces = height - (i + 1);
+
+                for (int j = 1; j <= spaces; j++)
+                {
+                    System.Console.Write(" ");
+                }
+
+                for (int j = 1; j <= rows[i]; j++)
+                {
+                    System.Console.Write("*");
+                }
+
+                System.Console.WriteLine();
             }
         }
     }
