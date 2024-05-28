@@ -439,14 +439,14 @@ namespace MyFirstProject
             }
         }
 
-        public int GetInputInt(string message) 
+        private int GetInputInt(string message) 
         {
             System.Console.WriteLine(message);
             bool isNumber = int.TryParse(Console.ReadLine(), out int number);
             return isNumber ? number : 0;
         }
 
-        public void DrawEvenTriangle() 
+        private void DrawEvenTriangle() 
         {
             for (int i = 1; i <= this.width; i++)
             {
@@ -458,9 +458,9 @@ namespace MyFirstProject
             }
         }
 
-        public void DrawOddTriangle() 
+        private void DrawOddTriangle() 
         {
-            List<int> rows = new List<int>();
+            List<int> rows = new();
 
             // Determine the triangle rows.
             for (int i = 1; i <= this.width; i++)
